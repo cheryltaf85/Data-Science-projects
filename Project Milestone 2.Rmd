@@ -1,0 +1,133 @@
+---
+title: "Project"
+author: "Cheryl Machingura"
+date: "2024-08-04"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Preparation and Cleansing Steps
+
+### 1. How to Import and Clean My Data
+
+#### Importing Data
+I will use R's `readr` library to import the dataset. The dataset includes information from social media usage and mental health surveys for teenagers. Here's how I will import the data:
+
+```{r}
+# Install and load necessary libraries
+required_packages <- c("readr", "dplyr", "tidyr", "lubridate")
+new_packages <- required_packages[!(required_packages %in% installed.packages()[,"Package"])]
+if(length(new_packages)) install.packages(new_packages)
+
+# Load libraries
+library(readr)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+
+# Importing the datasets
+social_media_data <- read_csv('social_media_usage.csv')
+mental_health_data <- read_csv('teen_mental_health_surveys.csv')
+
+# Display the structure of the data
+str(social_media_data)
+str(mental_health_data)
+```
+
+#### Cleaning Data
+
+Cleaning the data will involve the following steps:
+1. Handling Missing Values: Identify and handle missing values by either filling them with appropriate values or dropping the rows/columns.
+2. Removing Duplicates: Ensure that there are no duplicate rows.
+3. Data Type Conversion: Convert columns to appropriate data types (e.g., dates, categorical variables).
+4. Standardizing Column Names: Ensure column names are consistent and readable.
+
+Cleaning Process:
+
+```{r}
+# Handling missing values
+social_media_data <- social_media_data %>% drop_na()
+mental_health_data <- mental_health_data %>% drop_na()
+
+# Removing duplicates
+social_media_data <- social_media_data %>% distinct()
+mental_health_data <- mental_health_data %>% distinct()
+
+# Data type conversion
+social_media_data <- social_media_data %>%
+  mutate(usage_date = as.Date(usage_date, format = "%Y-%m-%d"))
+  
+mental_health_data <- mental_health_data %>%
+  mutate(survey_date = as.Date(survey_date, format = "%Y-%m-%d"))
+
+# Standardizing column names
+social_media_data <- social_media_data %>% rename_with(~ tolower(gsub(" ", "_", .)))
+mental_health_data <- mental_health_data %>% rename_with(~ tolower(gsub(" ", "_", .)))
+```
+
+### 2. Final Data Set
+
+Condensed view of the final dataset after cleaning:
+
+#### Social Media Data (First 5 rows)
+
+```{r}
+head(social_media_data, 5)
+```
+
+#### Mental Health Data (First 5 rows)
+
+```{r}
+head(mental_health_data, 5)
+```
+
+### 3. Questions for Future Steps
+
+1. How to effectively merge these datasets based on user_id and date?
+2. What additional cleaning might be necessary after merging?
+3. What specific statistical methods or machine learning techniques should be used for deeper analysis?
+
+### 4. What Information Is Not Self-Evident?
+
+The correlation between social media usage and mental health indicators is not immediately evident. The data needs to be analyzed to uncover patterns, trends, and potential causations.
+
+### 5. Different Ways to Look at This Data
+
+- Time Series Analysis: Analyzing changes over time.
+- Correlation Analysis: Checking for correlations between social media usage and mental health scores.
+- Categorical Analysis: Comparing mental health scores across different social media platforms.
+
+### 6. How Data will be Sliced and Diced
+
+- By Platform: Comparing mental health scores among users of different social media platforms.
+- By Time: Observing changes in mental health scores over different time periods.
+- By Usage: Grouping data based on hours spent on social media to see its effect on mental health.
+
+### 7. Summarizing Data to Answer Key Questions
+
+- Descriptive Statistics: Mean, median, standard deviation of usage hours and mental health scores.
+- Correlation Coefficients: To determine the strength and direction of relationships between variables.
+
+### 8. Plots and Tables to Illustrate the Findings
+
+- Line Plots: For time series analysis.
+- Bar Charts: For comparing different platforms.
+- Scatter Plots: For showing correlations between usage hours and mental health scores.
+- Box Plots: For visualizing distributions and detecting outliers.
+
+### 9. Incorporating Machine Learning Techniques
+
+I plan to use regression analysis to predict mental health scores based on social media usage patterns. Clustering techniques may also be used to identify distinct groups within the data.
+
+### 10. Questions for Future Steps
+
+1. How to interpret and validate the results from machine learning models?
+2. What additional features or data sources could improve the analysis?
+3. How to effectively communicate findings to a non-technical audience?
+```
+

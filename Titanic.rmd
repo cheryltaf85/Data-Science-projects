@@ -1,0 +1,55 @@
+---
+title: "Titanic.rmd"
+author: "Cheryl Machingura"
+date: "2023-07-08"
+output:
+  html_document: default
+---
+
+```{r}
+train <- read.csv("Downloads/train.csv")
+summary(train)
+gender_count<-table(train$Sex)
+barplot(gender_count, main = "Passenger Gender Distribution",
+       xlab = "Gender", ylab = "Count", col = c("blue", "orange"))
+```
+ Analysis 1:
+ 
+ This done by counting the number of male and female passengers and create a bar plot to visualize the gender distribution. It helps us understand the number of survivors in terms of gender. The analysis answers the question of how many male and female passengers were present in the dataset.
+ 
+    Question: What is the distribution of male and female passengers in the dataset?
+
+The aim of this analysis is to visualize the number of male and female passengers and to also understand the gender distribution among the passengers.
+
+  
+     Result and Conclusion:
+
+The bar plot presents the count of male and female passengers in the `train.csv` dataset. The x-axis represents the gender categories (male and female), and the y-axis represents the count of passengers. The bars are colored in "blue" for males and "orange" for females.
+
+From the analysis, we can observe the distribution of male and female passengers in the dataset and compare their respective counts. This visualization provides an overview of the gender composition among the passengers.There were more female than males represented in the passenger composition.
+
+ 
+
+``` {r}
+survival_rate <- aggregate(Survived ~ Sex, data = train, FUN = mean)
+barplot(survival_rate$Survived, names.arg = survival_rate$Sex,
+       main = "Survival Rate by Gender",
+       xlab = "Gender", ylab = "Survival Rate", ylim = c(0, 1), col = c("green", "yellow"))
+```
+Analysis 2: Survival Rate by Gender
+
+    Question: What is the survival rate among male and female passengers?
+
+This is an analysis to note if there is a difference in survival rates between male and female passengers.
+
+    Result and Conclusion:
+
+The bar plot illustrates the survival rate among male and female passengers. The x-axis represents the gender categories (male and female), and the y-axis represents the survival rate (ranging from 0 to 1). The bars are colored in "green" for males and "yellow" for females.
+
+We can conclude that there is a huge difference in survival rates among females and males. There were more females who survived as compared to males. This visualization allows for a quick comparison and understanding of the relative survival rates.
+
+
+
+
+
+
