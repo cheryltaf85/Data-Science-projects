@@ -1,6 +1,6 @@
 # Data Science Portfolio
 ## Overview
-### This repository showcases several data science projects I have completed using Python and R. The projects demonstrate my skills in data analysis, machine learning, statistical modeling, and data visualization.
+### This repository showcases several Data Science projects I have completed using Python and R. The projects demonstrate my Data Analysis, Machine Learning, Statistical Modeling, and Data Visualization skills.
 
 # Table of Contents
 ## Projects Overview
